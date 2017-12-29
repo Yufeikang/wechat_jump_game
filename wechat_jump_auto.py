@@ -21,7 +21,7 @@ def jump(distance):
     press_time = int(press_time)
     # TODO: 坐标根据截图的 size 来计算
     cmd = 'adb shell input swipe 500 1600 500 1601 ' + str(press_time)
-    print cmd
+    # print cmd
     os.system(cmd)
 
 
@@ -83,13 +83,15 @@ def main():
     while True:
         pull_screenshot()
         im = Image.open("./1.png")
+        # im.show();        
         # 获取棋子和 board 的位置
         piece_x, piece_y, board_x, board_y = find_piece_and_board(im)
         ts = int(time.time())
         print(ts, piece_x, piece_y, board_x, board_y)
         jump(math.sqrt(abs(board_x - piece_x) ** 2 + abs(board_y - piece_y) ** 2))
         backup_screenshot(ts)
-        time.sleep(3)   # 为了保证截图的时候应落稳了，多延迟一会儿
+        time.sleep(1.8)   # 为了保证截图的时候应落稳了，多延迟一会儿
+        # im.close();        
 
 
 if __name__ == '__main__':
